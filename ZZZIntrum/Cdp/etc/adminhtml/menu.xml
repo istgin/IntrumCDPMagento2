@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="ZZZIntrum_Cdp::main_menu" title="Intrum"
+             module="ZZZIntrum_Cdp" sortOrder="100"
+             resource="ZZZIntrum_Cdp::simplenews" />
+        <add id="ZZZIntrum_Cdp::manage_configuration" title="Intrum CDP Configuration"
+             module="ZZZIntrum_Cdp" sortOrder="1" parent="ZZZIntrum_Cdp::main_menu"
+             action="adminhtml/system_config/edit/section/byjunocheckoutsettings" resource="ZZZIntrum_Cdp::manage_configuration" />
+        <add id="ZZZIntrum_Cdp::manage_logs" title="Intrum CDP Logs"
+             module="ZZZIntrum_Cdp" sortOrder="2" parent="ZZZIntrum_Cdp::main_menu"
+             action="byjunocore/logs/index" resource="ZZZIntrum_Cdp::manage_logs" />
+    </menu>
+</config>
