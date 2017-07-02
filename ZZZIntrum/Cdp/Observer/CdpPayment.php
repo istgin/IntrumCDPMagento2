@@ -53,7 +53,7 @@ class CdpPayment implements ObserverInterface
             return;
         }
         $show = false;
-        if ($status == 2) {
+        if ($status == 12) {
             $show = true;
         }
         $result->setData('is_available', $show);

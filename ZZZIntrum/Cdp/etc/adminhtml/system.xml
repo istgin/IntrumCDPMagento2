@@ -20,6 +20,42 @@
                     <label>Mode</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\TestLive</source_model>
                 </field>
+                <field id="businesstobusiness" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable B2B check</label>
+                    <comment>B2B integration allow to to do credit check if customer provide company
+                        credentials
+                    </comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="clientid" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Client ID</label>
+                </field>
+                <field id="userid" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>User ID</label>
+                </field>
+                <field id="password" translate="label" type="password" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Password</label>
+                </field>
+                <field id="mail" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Technical Contact (E-mail)</label>
+                </field>
+                <field id="minamount" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Mininmal amount for credit check</label>
+                </field>
+                <field id="maxamount" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Maximal amount for credit check</label>
+                </field>
+                <field id="timeout" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Connection timeout to Intrum CDP server in seconds</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+                <field id="tmxenabled" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable ThreatMetrix security check</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="tmxkey" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>ThreatMetrix Org Id</label>
+                </field>
             </group>
         </section>
 
