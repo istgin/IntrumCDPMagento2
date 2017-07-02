@@ -1,0 +1,8 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="after.body.start">
+            <block cacheable="false" class="ZZZIntrum\Cdp\Block\Threatmetrix" name="intrum_threatmetrix" as="intrum_threatmetrix" template="ZZZIntrum_Cdp::intrum_threatmetrix.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

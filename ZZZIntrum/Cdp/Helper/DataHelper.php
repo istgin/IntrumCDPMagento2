@@ -111,9 +111,9 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
                         if (intval($status) > 15) {
                             $status = 0;
                         }
-                        //$this->saveLog($request, $xml, $response, $status, $ByjunoRequestName);
+                        $this->saveLog($request, $xml, $response, $status, $ByjunoRequestName);
                     } else {
-                        //$this->saveLog($request, $xml, "empty response", "0", $ByjunoRequestName);
+                        $this->saveLog($request, $xml, "empty response", "0", $ByjunoRequestName);
                     }
 
                     $this->_savedUser = Array(

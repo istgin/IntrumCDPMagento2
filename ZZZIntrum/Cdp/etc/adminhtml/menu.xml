@@ -10,6 +10,6 @@
              action="adminhtml/system_config/edit/section/intrumcdpcheckoutsetting" resource="ZZZIntrum_Cdp::manage_configuration" />
         <add id="ZZZIntrum_Cdp::manage_logs" title="Intrum CDP Logs"
              module="ZZZIntrum_Cdp" sortOrder="2" parent="ZZZIntrum_Cdp::main_menu"
-             action="byjunocore/logs/index" resource="ZZZIntrum_Cdp::manage_logs" />
+             action="cdp/logs/index" resource="ZZZIntrum_Cdp::manage_logs" />
     </menu>
 </config>
