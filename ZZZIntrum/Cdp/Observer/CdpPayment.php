@@ -14,6 +14,7 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Payment\Model\MethodInterface;
 use Magento\Quote\Model\Quote;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use ZZZIntrum\Cdp\Helper\DataHelper;
 
 class CdpPayment implements ObserverInterface
@@ -27,8 +28,6 @@ class CdpPayment implements ObserverInterface
         DataHelper $helper
     )
     {
-        //Observer initialization code...
-        //You can use dependency injection to get any class this observer may need.
         $this->_dataHelper = $helper;
     }
 
@@ -48,10 +47,17 @@ class CdpPayment implements ObserverInterface
             return;
         }
 
+        $paymentMethod = $event->getMethodInstance();
+        if (!$paymentMethod || !($paymentMethod instanceof MethodInterface)) {
+            return;
+        }
+
+        $code = $paymentMethod->getCode();
         $status = $this->_dataHelper->CDPRequest($quote);
         if ($status == null) {
             return;
         }
+
         $show = false;
         if ($status == 12) {
             $show = true;

@@ -3,4 +3,7 @@
     <event name="payment_method_is_active">
         <observer name="cdpPaymentOvserver" instance="ZZZIntrum\Cdp\Observer\CdpPayment" />
     </event>
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="checkout_controller_success_action" instance="ZZZIntrum\Cdp\Observer\CdpPaymentSuccess"  />
+    </event>
 </config>

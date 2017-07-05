@@ -275,11 +275,8 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
         $this->quoteRepository = $quoteRepository;
     }
 
-    public function CreateMagentoShopRequestPaid(\Magento\Sales\Model\Order $order,
-                                          \Magento\Sales\Model\Order\Payment $paymentmethod,
-                                          $gender_custom, $dob_custom, $transaction)
+    public function CDPRequestComplete(\Magento\Sales\Model\Order $order)
     {
-
         $request = new \ZZZIntrum\Cdp\Helper\Api\ByjunoRequest();
         $request->setClientId($this->_scopeConfig->getValue('intrumcdpcheckoutsettings/intrumcdp_setup/clientid', \Magento\Store\Model\ScopeInterface::SCOPE_STORE));
         $request->setUserID($this->_scopeConfig->getValue('intrumcdpcheckoutsettings/intrumcdp_setup/userid', \Magento\Store\Model\ScopeInterface::SCOPE_STORE));
@@ -294,17 +291,6 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
         if (!empty($b)) {
             try {
                 $dobObject = new \DateTime($b);
-                if ($dobObject != null) {
-                    $request->setDateOfBirth($dobObject->format('Y-m-d'));
-                }
-            } catch (\Exception $e) {
-
-            }
-        }
-
-        if (!empty($dob_custom)) {
-            try {
-                $dobObject = new \DateTime($dob_custom);
                 if ($dobObject != null) {
                     $request->setDateOfBirth($dobObject->format('Y-m-d'));
                 }
@@ -340,13 +326,6 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
             }
         }
 
-        if (!empty($gender_custom)) {
-            if (in_array(strtolower($gender_custom), $gender_male_possible_prefix)) {
-                $request->setGender('1');
-            } else if (in_array(strtolower($gender_custom), $gender_female_possible_prefix)) {
-                $request->setGender('2');
-            }
-        }
         $billingStreet = $order->getBillingAddress()->getStreet();
         $billingStreet = implode("", $billingStreet);
         $requestId = uniqid((String)$order->getBillingAddress()->getEntityId() . "_");
@@ -359,7 +338,6 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
         }
         $request->setFirstName((String)$order->getBillingAddress()->getFirstname());
         $request->setLastName((String)$order->getBillingAddress()->getLastname());
-        //quote.billingAddress().street[0] + ", " + quote.billingAddress().city + ", " + quote.billingAddress().postcode
         $request->setFirstLine(trim((String)$billingStreet));
         $request->setCountryCode(strtoupper($order->getBillingAddress()->getCountryId()));
         $request->setPostCode((String)$order->getBillingAddress()->getPostcode());
@@ -373,10 +351,6 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
 
         $request->setTelephonePrivate((String)trim($order->getBillingAddress()->getTelephone(), '-'));
         $request->setEmail((String)$order->getBillingAddress()->getEmail());
-
-        $extraInfo["Name"] = 'TRANSACTIONNUMBER';
-        $extraInfo["Value"] = $transaction;
-        $request->setExtraInfo($extraInfo);
 
         $extraInfo["Name"] = 'ORDERCLOSED';
         $extraInfo["Value"] = 'YES';
@@ -401,11 +375,6 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
             $request->setExtraInfo($extraInfo);
         }
 
-        if ($paymentmethod->getAdditionalInformation('payment_send') == 'postal') {
-            $extraInfo["Name"] = 'PAPER_INVOICE';
-            $extraInfo["Value"] = 'YES';
-            $request->setExtraInfo($extraInfo);
-        }
 
         if ($order->canShip()) {
 
@@ -463,20 +432,8 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
         $extraInfo["Value"] = $order->getIncrementId();
         $request->setExtraInfo($extraInfo);
 
-        $extraInfo["Name"] = 'PAYMENTMETHOD';
-        $extraInfo["Value"] = $this->mapMethod($paymentmethod->getAdditionalInformation('payment_plan'));
-        $request->setExtraInfo($extraInfo);
-
-        $extraInfo["Name"] = 'REPAYMENTTYPE';
-        $extraInfo["Value"] = $this->mapRepayment($paymentmethod->getAdditionalInformation('payment_plan'));
-        $request->setExtraInfo($extraInfo);
-
-        $extraInfo["Name"] = 'RISKOWNER';
-        $extraInfo["Value"] = 'IJ';
-        $request->setExtraInfo($extraInfo);
-
         $extraInfo["Name"] = 'CONNECTIVTY_MODULE';
-        $extraInfo["Value"] = 'Byjuno Magento 2.1 module 1.0.9';
+        $extraInfo["Value"] = 'Intrum CDP Magento 2.1 module 1.0.0';
         $request->setExtraInfo($extraInfo);
 
         return $request;
