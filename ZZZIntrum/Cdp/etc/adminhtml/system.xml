@@ -59,6 +59,20 @@
             </group>
         </section>
 
+        <section id="intrumcdppaymentconfig" translate="label" sortOrder="2" showInDefault="1"
+                 showInWebsite="1" showInStore="1">
+            <label>Payment methods setup</label>
+            <tab>intrumcdp_main_tab</tab>
+            <resource>ZZZIntrum_Cdp::system_config</resource>
+            <group id="intrumcdp_payment_config" translate="label" type="text" sortOrder="1" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Payment methods setup</label>
+                <field id="title_installment" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+            </group>
+        </section>
+
     </system>
 </config>
 
