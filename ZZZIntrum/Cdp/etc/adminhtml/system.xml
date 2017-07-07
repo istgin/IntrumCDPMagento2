@@ -73,6 +73,28 @@
             </group>
         </section>
 
+        <section id="intrumcdppayments" translate="label" sortOrder="3" showInDefault="1"
+                 showInWebsite="1" showInStore="1">
+            <label>Disabled payment methods</label>
+            <tab>intrumcdp_main_tab</tab>
+            <resource>ZZZIntrum_Cdp::system_config</resource>
+            <group id="intrumcdp_payment_config" translate="label" type="text" sortOrder="1" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Disabled payment methods</label>
+                <field id="byjunos4transactonexplain" translate="label" type="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>ZZZIntrum\Cdp\Model\Source\ExplainDisable</frontend_model>
+                </field>
+                <field id="code_1" translate="label" type="checkboxes" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Code 1</label>
+                    <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
+                </field>
+                <field id="code_2" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Code 2</label>
+                    <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
+                </field>
+            </group>
+        </section>
+
     </system>
 </config>
 
