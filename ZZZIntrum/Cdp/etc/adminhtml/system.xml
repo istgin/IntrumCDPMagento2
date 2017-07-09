@@ -82,67 +82,67 @@
                 <field id="byjunos4transactonexplain" translate="label" type="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <frontend_model>ZZZIntrum\Cdp\Model\Source\ExplainDisable</frontend_model>
                 </field>
-                <field id="status_1" translate="label" type="checkboxes" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_1" translate="label" type="checkboxes" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>There are serious negative indicators (status 1)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_2" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_2" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>All payment methods (status 2)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_3" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_3" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Manual post-processing (currently not yet in use) (status 3)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_4" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_4" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Postal address is incorrect (status 4)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_5" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_5" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enquiry exceeds the credit limit (the credit limit is specified in the cooperation agreement) (status 5)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_6" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_6" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Customer specifications not met (optional) (status 6)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_7" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_7" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enquiry exceeds the net credit limit (enquiry amount plus open items exceeds credit limit) (status 7)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_8" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_8" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Person queried is not of creditworthy age (status 8)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_9" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_9" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Delivery address does not match invoice address (for payment guarantee only) (status 9)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_10" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_10" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Household cannot be identified at this address (status 10)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_11" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_11" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Country is not supported (status 11)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_12" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_12" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Party queried is not a natural person (status 12)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_13" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_13" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>System is in maintenance mode (status 13)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_14" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_14" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Address with high fraud risk (status 14)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_15" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_15" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Allowance is too low (status 15)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
-                <field id="status_0" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="status_0" translate="label" type="checkboxes" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Fail to get status (status Error)</label>
                     <source_model>ZZZIntrum\Cdp\Model\Source\Payments</source_model>
                 </field>
