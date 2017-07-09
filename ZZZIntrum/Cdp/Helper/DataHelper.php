@@ -432,12 +432,30 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
         $extraInfo["Value"] = $order->getIncrementId();
         $request->setExtraInfo($extraInfo);
 
+        $payment = $order->getPayment();
+        $method = $payment->getMethodInstance();
+        /* @var $method \Magento\OfflinePayments\Model\Checkmo */
+        $methodCode = $method->getCode();
+
+        $extraInfo["Name"] = 'PAYMENTMETHOD';
+        $extraInfo["Value"] = $this->mapPaymentMethodToSpecs($methodCode);
+        $request->setExtraInfo($extraInfo);
+
         $extraInfo["Name"] = 'CONNECTIVTY_MODULE';
         $extraInfo["Value"] = 'Intrum CDP Magento 2.1 module 1.0.0';
         $request->setExtraInfo($extraInfo);
 
         return $request;
 
+    }
+
+    public function mapPaymentMethodToSpecs($paymentCode){
+
+        $mapping = $this->_scopeConfig->getValue('intrumcdppaymentconfig/intrumcdp_payment_config/group_'.$paymentCode, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        if (empty($mapping)) {
+            $mapping = 'INVOICE';
+        }
+        return $mapping;
     }
 
     public function CreateMagentoShopRequestCreditCheck(\Magento\Quote\Model\Quote $quote)
@@ -591,12 +609,8 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
             }
         }
 
-        $extraInfo["Name"] = 'RISKOWNER';
-        $extraInfo["Value"] = 'IJ';
-        $request->setExtraInfo($extraInfo);
-
         $extraInfo["Name"] = 'CONNECTIVTY_MODULE';
-        $extraInfo["Value"] = 'Byjuno Magento 2.1 module 1.0.9';
+        $extraInfo["Value"] = 'Intrum CDP Magento 2.1 module 1.0.0';
         $request->setExtraInfo($extraInfo);
         return $request;
     }

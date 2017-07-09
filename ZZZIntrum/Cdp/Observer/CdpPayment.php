@@ -58,9 +58,18 @@ class CdpPayment implements ObserverInterface
             return;
         }
 
-        $show = false;
-        if ($status == 12) {
-            $show = true;
+        $show = true;
+        $status = intval($status);
+        if ($status < 0 || $status > 15) {
+            $status = 0;
+        }
+        $methodCodes = $this->_dataHelper->_scopeConfig->getValue('intrumcdppayments/intrumcdp_payment_config/status_'.(string)$status, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $methods = explode(",", $methodCodes);
+        foreach($methods as $mthd)
+        {
+            if ($mthd == $code) {
+                $show = false;
+            }
         }
         $result->setData('is_available', $show);
     }
