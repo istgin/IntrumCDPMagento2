@@ -9,6 +9,14 @@ use \Magento\Payment\Model\Config;
 
 class MethodMapping extends Fieldset
 {
+    /**
+     * @var \Magento\Framework\DataObject
+     */
+    protected $_dummyElement;
+    /**
+     * @var \Magento\Config\Block\System\Config\Form\Field
+     */
+    protected $_fieldRenderer;
 
     public function render(AbstractElement $element)
     {
@@ -42,10 +50,20 @@ class MethodMapping extends Fieldset
         return $this->_values;
     }
 
+    protected function _getFieldRenderer()
+    {
+        if (empty($this->_fieldRenderer)) {
+            $this->_fieldRenderer = $this->_layout->getBlockSingleton(
+                'Magento\Config\Block\System\Config\Form\Field'
+            );
+        }
+        return $this->_fieldRenderer;
+    }
+
     protected function _getDummyElement()
     {
         if (empty($this->_dummyElement)) {
-            $this->_dummyElement = new Varien_Object(array('show_in_default'=>1, 'show_in_website'=>1));
+            $this->_dummyElement = new \Magento\Framework\DataObject(['showInDefault' => 1, 'showInWebsite' => 1]);
         }
         return $this->_dummyElement;
     }
@@ -61,10 +79,13 @@ class MethodMapping extends Fieldset
             $data = $configData[$path];
             $inherit = false;
         } else {
-            $data = 'INVOICE';
+            $data = (string)$this->getForm()->getConfigValue($path);
             $inherit = true;
         }
-        $field = $element ->addField(
+
+        $elementShow = $this->_getDummyElement();
+
+        $field = $element->addField(
             'groups[intrumcdp_payment_config][fields][group_'.$paymentCode.'][value]',
             'select',
             [
@@ -72,9 +93,14 @@ class MethodMapping extends Fieldset
                 'title' => __($paymentModel->getTitle()),
                 'name' => 'groups[intrumcdp_payment_config][fields][group_'.$paymentCode.'][value]',
                 'required' => true,
-                'options' => $this->_getValues(),//['1' => __('Enabled'), '0' => __('Disabled')],
+                'values' => $this->_getValues(),
                 'value' => $data,
+                'inherit' => $inherit,
+                'can_use_default_value' => $this->getForm()->canUseDefaultValue($elementShow),
+                'can_use_website_value' => $this->getForm()->canUseWebsiteValue($elementShow)
             ]
+        )->setRenderer(
+            $this->_getFieldRenderer()
         );
         return $field->toHtml();
         //return '<div style="white-space: nowrap; background-color: #ddffdf; padding: 10px 5px 10px 5px">Select disabled payment methods for this code</div>';
