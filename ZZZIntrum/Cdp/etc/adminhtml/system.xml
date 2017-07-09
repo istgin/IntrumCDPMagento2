@@ -67,9 +67,7 @@
             <group id="intrumcdp_payment_config" translate="label" type="text" sortOrder="1" showInDefault="1"
                    showInWebsite="1" showInStore="1">
                 <label>Payment methods setup</label>
-                <field id="title_installment" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Title</label>
-                </field>
+                <frontend_model>ZZZIntrum\Cdp\Model\Source\MethodMapping</frontend_model>
             </group>
         </section>
 
