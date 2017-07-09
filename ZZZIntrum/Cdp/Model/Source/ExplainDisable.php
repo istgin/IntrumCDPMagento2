@@ -21,7 +21,7 @@ class ExplainDisable extends Field
      */
     protected function _getElementHtml(AbstractElement $element)
     {
-        return '<div style="white-space: nowrap; background-color: #ddffdf; padding: 10px 5px 10px 5px">Select disabled payment methods for this code</div>';
+        return '<div style="white-space: nowrap; background-color: #ddffdf; padding: 10px 5px 10px 5px">Select disabled payment methods for this code (CTRL+ click - select multiple)</div>';
     }
 
 }

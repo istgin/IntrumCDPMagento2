@@ -54,11 +54,5 @@ class Payments implements \Magento\Framework\Option\ArrayInterface
             );
         }
         return $payments;
-
-        var_dump($payments);
-        $array = Array();
-        $array[0] = Array("label" => "Sunday", "value" => "XXXX");
-        $array[1] = Array("label" => "Sunday2", "value" => "XXXX2");
-        return $array;
     }
 }
