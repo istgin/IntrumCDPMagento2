@@ -33,6 +33,14 @@ class CdpPayment implements ObserverInterface
 
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
+        $isActive = $this->_dataHelper->_scopeConfig->getValue('intrumcdpcheckoutsettings/intrumcdp_setup/active');
+        if (!$isActive) {
+            return;
+        }
+
+        $minAmount = $this->_dataHelper->_scopeConfig->getValue('intrumcdpcheckoutsettings/intrumcdp_setup/minamount', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $maxAmount = $this->_dataHelper->_scopeConfig->getValue('intrumcdpcheckoutsettings/intrumcdp_setup/maxamount', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+
         $event = $observer->getEvent();
         if (!$event || !($event instanceof Event)) {
             return;
@@ -44,6 +52,11 @@ class CdpPayment implements ObserverInterface
 
         $quote = $event->getQuote();
         if (!$quote || !($quote instanceof Quote)) {
+            return;
+        }
+
+        $total = $quote->getGrandTotal();
+        if (($minAmount != '' && $total < $minAmount) || ($maxAmount != '' && $total > $maxAmount)) {
             return;
         }
 
