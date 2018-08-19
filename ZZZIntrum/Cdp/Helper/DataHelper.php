@@ -446,7 +446,7 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
         $request->setExtraInfo($extraInfo);
 
         $extraInfo["Name"] = 'CONNECTIVTY_MODULE';
-        $extraInfo["Value"] = 'Intrum CDP Magento 2.1 module 1.0.0';
+        $extraInfo["Value"] = 'Intrum CDP Magento 2.1 module 1.0.1';
         $request->setExtraInfo($extraInfo);
 
         return $request;
@@ -614,7 +614,7 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         $extraInfo["Name"] = 'CONNECTIVTY_MODULE';
-        $extraInfo["Value"] = 'Intrum CDP Magento 2.1 module 1.0.0';
+        $extraInfo["Value"] = 'Intrum CDP Magento 2.1 module 1.0.1';
         $request->setExtraInfo($extraInfo);
         return $request;
     }
