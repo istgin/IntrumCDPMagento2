@@ -63,6 +63,8 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
             || $request->getExtraInfoByKey("DELIVERY_POSTCODE") != $this->_savedUser["DELIVERY_POSTCODE"]
             || $request->getExtraInfoByKey("DELIVERY_TOWN") != $this->_savedUser["DELIVERY_TOWN"]
             || $request->getExtraInfoByKey("DELIVERY_COMPANYNAME") != $this->_savedUser["DELIVERY_COMPANYNAME"]
+            || $request->getExtraInfoByKey("ORDERAMOUNT") != $this->_savedUser["ORDERAMOUNT"]
+            || $request->getExtraInfoByKey("ORDERCURRENCY") != $this->_savedUser["ORDERCURRENCY"]
         ) {
             return false;
         }
@@ -137,7 +139,9 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
                         "DELIVERY_COUNTRYCODE" => $request->getExtraInfoByKey("DELIVERY_COUNTRYCODE"),
                         "DELIVERY_POSTCODE" => $request->getExtraInfoByKey("DELIVERY_POSTCODE"),
                         "DELIVERY_TOWN" => $request->getExtraInfoByKey("DELIVERY_TOWN"),
-                        "DELIVERY_COMPANYNAME" => $request->getExtraInfoByKey("DELIVERY_COMPANYNAME")
+                        "DELIVERY_COMPANYNAME" => $request->getExtraInfoByKey("DELIVERY_COMPANYNAME"),
+                        "ORDERAMOUNT" => $request->getExtraInfoByKey("ORDERAMOUNT"),
+                        "ORDERCURRENCY" => $request->getExtraInfoByKey("ORDERCURRENCY")
                     );
                     $this->_checkoutSession->setIsTheSame($this->_savedUser);
                     $this->_checkoutSession->setCDPStatus($status);
