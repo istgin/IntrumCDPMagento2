@@ -1,0 +1,25 @@
+<?php
+// @codingStandardsIgnoreFile
+/** @var \Magento\Sales\Block\Adminhtml\Order\View\History $block */
+/** @var \Magento\Sales\Model\Order $order */
+$status = $block->getOrder()->getData('intrum_status');
+?><section class="admin__page-section intrum-tab-content">
+    <div class="admin__page-section-title">
+        <span class="title">Intrum credit status information</span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-billing-address">
+            <address class="admin__page-section-item-content">
+                <?php if ($status == "0") { ?>
+                    Intrum status: error in CDP request<br>
+                    Intrum credit rating: error in CDP request<br>
+                    Intrum credit rating level: error in CDP request
+                <?php } else { ?>
+                    Intrum status: <?php echo $block->getOrder()->getData('intrum_status'); ?><br>
+                    Intrum credit rating: <?php echo $block->getOrder()->getData('intrum_credit_rating'); ?><br>
+                    Intrum credit rating level: <?php echo $block->getOrder()->getData('intrum_credit_level'); ?>
+                <?php } ?>
+            </address>
+        </div>
+    </div>
+</section>

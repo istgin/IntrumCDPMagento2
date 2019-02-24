@@ -25,6 +25,40 @@ class UpgradeSchema implements UpgradeSchemaInterface
             //be careful, since everything below is true for installation !
         }
 
+        if (version_compare($context->getVersion(), '1.1.0') < 0) {
+            $orderTable = 'sales_order';
+            $setup->getConnection()
+                ->addColumn(
+                    $setup->getTable($orderTable),
+                    'intrum_status',
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => 255,
+                        'comment' => 'Intrum status'
+                    ]
+                );
+            $setup->getConnection()
+                ->addColumn(
+                    $setup->getTable($orderTable),
+                    'intrum_credit_rating',
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => 255,
+                        'comment' => 'Intrum credit rating'
+                    ]
+                );
+            $setup->getConnection()
+                ->addColumn(
+                    $setup->getTable($orderTable),
+                    'intrum_credit_level',
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => 255,
+                        'comment' => 'Intrum credit level'
+                    ]
+                );
+        }
+
         $setup->endSetup();
     }
 }
