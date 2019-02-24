@@ -113,6 +113,8 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
                         if (intval($status) > 15) {
                             $status = 0;
                         }
+                        $this->_checkoutSession->setCDPCreditRating($this->_response->getCustomerCreditRating());
+                        $this->_checkoutSession->setCDPCreditLevel($this->_response->getCustomerCreditRatingLevel());
                         $this->saveLog($request, $xml, $response, $status, $ByjunoRequestName);
                     } else {
                         $this->saveLog($request, $xml, "empty response", "0", $ByjunoRequestName);

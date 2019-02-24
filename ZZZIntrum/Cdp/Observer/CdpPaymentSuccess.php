@@ -41,6 +41,10 @@ class CdpPaymentSuccess implements ObserverInterface
         $this->executeComplete($order);
     }
 
+    /**
+     * @param \Magento\Sales\Model\Order $order
+     * @return array
+     */
     public function executeComplete($order)
     {
         $request = $this->_dataHelper->CDPRequestComplete($order);
@@ -68,6 +72,14 @@ class CdpPaymentSuccess implements ObserverInterface
             if (intval($status) > 15) {
                 $status = 0;
             }
+
+            $CDPCreditRating = $this->_dataHelper->_checkoutSession->getCDPCreditRating();
+            $CDPCreditLevel = $this->_dataHelper->_checkoutSession->getCDPCreditLevel();
+            $CDPstatus = $this->_dataHelper->_checkoutSession->getCDPStatus();
+            $order->setData('byjuno_status',$CDPstatus);
+            $order->setData('byjuno_credit_rating',$CDPCreditRating);
+            $order->setData('byjuno_credit_level',$CDPCreditLevel);
+            $order->save();
             $this->_dataHelper->saveLog($request, $xml, $response, $status, $ByjunoRequestName);
         } else {
             $this->_dataHelper->saveLog($request, $xml, "empty response", "0", $ByjunoRequestName);
