@@ -33,9 +33,9 @@ class ByjunoCommunicator
             $timeout = 30;
         }
         if ($this->server == 'test') {
-            $sslsock = fsockopen("ssl://secure.intrum.ch", 443, $errno, $errstr, $timeout);
+            $sslsock = @fsockopen("ssl://secure.intrum.ch", 443, $errno, $errstr, $timeout);
         } else {
-            $sslsock = fsockopen("ssl://secure.intrum.ch", 443, $errno, $errstr, $timeout);
+            $sslsock = @fsockopen("ssl://secure.intrum.ch", 443, $errno, $errstr, $timeout);
         }
         if(is_resource($sslsock)) {
 

@@ -33,7 +33,7 @@ class CdpPayment implements ObserverInterface
 
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        $isActive = $this->_dataHelper->_scopeConfig->getValue('intrumcdpcheckoutsettings/intrumcdp_setup/active');
+        $isActive = $this->_dataHelper->_scopeConfig->getValue('intrumcdpcheckoutsettings/intrumcdp_setup/active', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         if (!$isActive) {
             return;
         }
