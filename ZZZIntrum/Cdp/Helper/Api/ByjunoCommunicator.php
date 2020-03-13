@@ -27,43 +27,41 @@ class ByjunoCommunicator
         return $this->server;
     }
 
-    public function sendRequest($xmlRequest, $timeout = 30) {
+    public function sendRequest($xmlRequest, $timeout = 30)
+    {
         $response = "";
         if (intval($timeout) < 0) {
             $timeout = 30;
         }
+
+        $url = 'https://secure.intrum.ch/';
         if ($this->server == 'test') {
-            $sslsock = @fsockopen("ssl://secure.intrum.ch", 443, $errno, $errstr, $timeout);
+            $url .= 'services/creditCheckDACH_01_41_TEST/response.cfm';
         } else {
-            $sslsock = @fsockopen("ssl://secure.intrum.ch", 443, $errno, $errstr, $timeout);
+            $url .= 'services/creditCheckDACH_01_41/response.cfm';
         }
-        if(is_resource($sslsock)) {
 
-            $request_data	= urlencode("REQUEST")."=".urlencode($xmlRequest);
-            $request_length	= strlen($request_data);
+        $request_data = urlencode("REQUEST") . "=" . urlencode($xmlRequest);
 
-            if ($this->server == 'test') {
-                fputs($sslsock, "POST /services/creditCheckDACH_01_41_TEST/response.cfm HTTP/1.0\r\n");
-            } else {
-                fputs($sslsock, "POST /services/creditCheckDACH_01_41/response.cfm HTTP/1.0\r\n");
-            }
+        $headers = [
+            "Content-type: application/x-www-form-urlencoded",
+            "Connection: close"
+        ];
 
-            fputs($sslsock, "Host: byjuno.com\r\n");
-            fputs($sslsock, "Content-type: application/x-www-form-urlencoded\r\n");
-            fputs($sslsock, "Content-Length: ".$request_length."\r\n");
-            fputs($sslsock, "Connection: close\r\n\r\n");
-            fputs($sslsock, $request_data);
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
+        curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $request_data);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $response = @curl_exec($curl);
+        @curl_close($curl);
 
-            while(!feof($sslsock)) {
-                $response .= @fgets($sslsock, 128);
-            }
-
-            fclose($sslsock);
-
-            $response = substr($response, strpos($response,'<?xml')-1);
-            $response = substr($response, 1,strpos($response,'Response>')+8);
-        }
+        $response = trim($response);
         return $response;
     }
 
-};
+}
