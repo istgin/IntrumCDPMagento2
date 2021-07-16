@@ -24,7 +24,31 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
     public $_configLoader;
     public $_customerMetadata;
 
-    private $_savedUser;
+    protected $_savedUser = Array(
+        "FirstName" => "",
+        "LastName" => "",
+        "FirstLine" => "",
+        "CountryCode" => "",
+        "PostCode" => "",
+        "Town" => "",
+        "CompanyName1",
+        "DateOfBirth",
+        "Email",
+        "Fax",
+        "TelephonePrivate",
+        "TelephoneOffice",
+        "Gender",
+        "DELIVERY_FIRSTNAME",
+        "DELIVERY_LASTNAME",
+        "DELIVERY_FIRSTLINE",
+        "DELIVERY_HOUSENUMBER",
+        "DELIVERY_COUNTRYCODE",
+        "DELIVERY_POSTCODE",
+        "DELIVERY_TOWN",
+        "DELIVERY_COMPANYNAME",
+        "ORDERAMOUNT",
+        "ORDERCURRENCY"
+    );
 
     /**
      * @var \Psr\Log\LoggerInterface
@@ -74,6 +98,12 @@ class DataHelper extends \Magento\Framework\App\Helper\AbstractHelper
     /* @var $quote \Magento\Quote\Model\Quote */
     public function CDPRequest($quote) {
         if ($quote == null) {
+            return null;
+        }
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $state =  $objectManager->get('Magento\Framework\App\State');
+        if ($state->getAreaCode() == "adminhtml") {
+            //skip credit check for backend
             return null;
         }
         if ($quote != null && $quote->getBillingAddress() != null) {
